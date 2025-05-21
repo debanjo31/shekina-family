@@ -22,7 +22,7 @@ const slides = [
     ctaLink: "/live",
   },
   {
-    image: "/images/hero2.jpg",
+    image: "/images/hero3.jpg",
     title: "Latest Sermons",
     subtitle: "Listen to our latest messages",
     cta: "Listen Now",

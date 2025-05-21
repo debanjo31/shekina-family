@@ -87,69 +87,88 @@ export function UpcomingEvents({ initialEvents = [] }: UpcomingEventsProps) {
   }
 
   return (
-    <section className="py-24 bg-gradient-to-t from-muted/50 to-background">
-      <div className="container">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+    <section className="py-24 bg-gradient-to-t from-muted/30 to-background relative">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-40 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-20 right-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="container relative z-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16">
           <div>
-            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary/90 to-primary/60">
+            <div className="inline-block mb-3">
+              <span className="text-xs uppercase tracking-wider text-primary font-semibold border-l-2 border-accent pl-2">Calendar</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary/90 to-primary/60">
               Upcoming Events
             </h2>
-            <p className="text-muted-foreground mt-3 text-lg">
+            <div className="w-20 h-0.5 bg-accent mt-4"></div>
+            <p className="text-muted-foreground mt-4 text-lg font-body">
               Join us for these special gatherings
             </p>
           </div>
           <Button
             asChild
             variant="outline"
-            className="mt-4 md:mt-0 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+            className="mt-6 md:mt-0 hover:bg-primary/10 border border-primary/30 hover:border-primary px-6 py-2 transition-all duration-300 rounded-full"
           >
             <Link href="/events">View All Events</Link>
           </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayEvents.map((event) => (
+          {displayEvents.map((event, index) => (
             <Card
               key={event.id}
-              className="overflow-hidden group hover:shadow-xl transition-all duration-300 border-muted/40 hover:border-primary/40"
+              className="overflow-hidden group hover:shadow-xl transition-all duration-300 border-muted/20 hover:border-primary/30 rounded-xl animate-fade-up"
+              style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="relative h-56">
+              <div className="relative h-48">
                 <Image
                   src={event.image_url || "/placeholder.svg"}
                   alt={event.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10" />
+                <div className="absolute top-0 right-0 bg-accent/90 text-accent-foreground px-3 py-1.5 text-sm font-medium shadow-md">
+                  {new Date(event.start_date).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric'
+                  })}
+                </div>
               </div>
-              <CardHeader>
-                <CardTitle className="line-clamp-1 text-xl group-hover:text-primary transition-colors duration-300">
+              <CardHeader className="pb-2">
+                <CardTitle className="line-clamp-1 text-xl font-heading group-hover:text-primary transition-colors duration-300">
                   {event.title}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <Calendar className="h-5 w-5 mt-0.5 text-primary/80" />
-                  <div>
-                    <p className="text-sm font-medium">
-                      {formatDate(event.start_date)}
-                    </p>
-                    {event.end_date && (
-                      <p className="text-sm text-muted-foreground">
-                        to {formatDate(event.end_date)}
+                <div className="flex flex-col space-y-3 p-4 bg-muted/30 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <Calendar className="h-5 w-5 mt-0.5 text-primary" />
+                    <div>
+                      <p className="text-sm font-medium">
+                        {formatDate(event.start_date)}
                       </p>
-                    )}
+                      {event.end_date && (
+                        <p className="text-xs text-muted-foreground">
+                          to {formatDate(event.end_date)}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Clock className="h-5 w-5 text-primary" />
+                    <p className="text-sm">{formatTime(event.start_date)}</p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="h-5 w-5 text-primary" />
+                    <p className="text-sm font-medium">{event.location}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Clock className="h-5 w-5 text-primary/70" />
-                  <p className="text-sm">{formatTime(event.start_date)}</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-primary/70" />
-                  <p className="text-sm">{event.location}</p>
-                </div>
-                <p className="line-clamp-2 text-sm text-muted-foreground">
+                <p className="line-clamp-2 text-sm text-muted-foreground mt-2">
                   {event.description}
                 </p>
               </CardContent>
@@ -158,13 +177,27 @@ export function UpcomingEvents({ initialEvents = [] }: UpcomingEventsProps) {
                   asChild
                   variant="outline"
                   size="sm"
-                  className="w-full hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                  className="w-full hover:bg-accent/10 hover:border-accent/30 group"
                 >
-                  <Link href={`/events/${event.id}`}>Learn More</Link>
+                  <Link href={`/events/${event.id}`} className="flex items-center justify-center gap-1">
+                    Learn More
+                    <svg className="w-4 h-4 mt-0.5 transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                    </svg>
+                  </Link>
                 </Button>
               </CardFooter>
             </Card>
           ))}
+        </div>
+        
+        <div className="flex justify-center mt-16">
+          <div className="relative">
+            <div className="absolute -inset-1 rounded-full blur-md bg-gradient-to-r from-primary/30 to-accent/30"></div>
+            <Button asChild className="relative rounded-full bg-background hover:bg-background/90 text-foreground border border-primary/30 px-8 hover-lift">
+              <Link href="/events">View All Upcoming Events</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
