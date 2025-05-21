@@ -2,50 +2,154 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom animations for Shekina Family Website */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
+    --foreground: 222 47% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
-    --popover: 0 0% 100%
-    --popover-foreground: 224 71.4% 4.1%;
-    --primary: 262.1 83.3% 57.8%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 235 75% 40%; /* Deep royal blue */
     --primary-foreground: 210 20% 98%;
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 42 87% 55%; /* Gold accent */
+    --accent-foreground: 222 47% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 20% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 262.1 83.3% 57.8%;
-    --radius: 1rem;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 235 75% 40%;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
+    --background: 222 47% 11%;
+    --foreground: 213 31% 91%;
+    --card: 222 47% 11%;
+    --card-foreground: 213 31% 91%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 213 31% 91%;
+    --primary: 235 75% 60%; /* Brighter blue for dark mode */
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 32% 17%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --muted: 223 47% 20%;
+    --muted-foreground: 215.4 16.3% 70%;
+    --accent: 42 87% 55%; /* Same gold accent */
+    --accent-foreground: 222 47% 11%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --border: 217.2 32.6% 25%;
+    --input: 217.2 32.6% 25%;
+    --ring: 235 75% 60%;
+  }
+  
+  /* Custom utility classes */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 4s ease-in-out infinite;
+  }
+  
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+  
+  /* Text highlight style */
+  .highlight-text {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .highlight-text::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    z-index: -1;
+    background-color: hsla(var(--accent), 0.3);
+    transform: skew(-12deg);
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    transition: transform 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Gold accent underline */
+  .accent-underline {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .accent-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 30%;
+    height: 2px;
+    background-color: hsl(var(--accent));
+    transition: width 0.3s ease;
+  }
+  
+  .accent-underline:hover::after {
+    width: 100%;
+  }
+  
+  /* Enhanced focus styles for accessibility */
+  .focus-ring:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--background)), 
+                0 0 0 4px hsl(var(--primary));
   }
 }
 

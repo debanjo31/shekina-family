@@ -1,0 +1,183 @@
+/* Custom animations for Shekina Family Website */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(var(--accent), 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(var(--accent), 0.8);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Custom utility classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-appear {
+  animation: appear 0.5s ease-out forwards;
+}
+
+/* Text highlight style */
+.highlight-text {
+  position: relative;
+  z-index: 1;
+}
+
+.highlight-text::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  z-index: -1;
+  background-color: hsla(var(--accent), 0.3);
+  transform: skew(-12deg);
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+/* Gold accent underline */
+.accent-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.accent-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 30%;
+  height: 2px;
+  background-color: hsl(var(--accent));
+  transition: width 0.3s ease;
+}
+
+.accent-underline:hover::after {
+  width: 100%;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes slide-in-left {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  0% { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.2) 50%, 
+    rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.5s forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.5s forwards;
+}
+
+/* Add fancy hover effects */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 15px rgba(var(--accent), 0.5);
+}
+
+/* Focus effects for accessibility and visual appeal */
+.focus-ring {
+  transition: box-shadow 0.2s ease;
+}
+
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--background)), 
+              0 0 0 4px hsl(var(--primary));
+}

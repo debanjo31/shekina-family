@@ -19,6 +19,12 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)", "sans-serif"],
+        serif: ["var(--font-playfair)", "serif"],
+        heading: ["var(--font-playfair)", "serif"],
+        body: ["var(--font-lora)", "serif"]
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -68,10 +74,40 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-down": {
+          "0%": { opacity: "0", transform: "translateY(-10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "fade-out": {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+        "scale-in": {
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-up": "fade-up 0.5s ease-out",
+        "fade-down": "fade-down 0.5s ease-out",
+        "fade-in": "fade-in 0.5s ease-out",
+        "fade-out": "fade-out 0.5s ease-out",
+        "scale-in": "scale-in 0.2s ease-out",
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "texture-light": "url('/images/texture-light.png')",
       },
     },
   },
