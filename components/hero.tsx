@@ -44,13 +44,17 @@ export function Hero() {
   }, []);
 
   return (
-    <div className="relative h-[500px] md:h-[600px] overflow-hidden">
+    <div className="relative h-[600px] md:h-[700px] overflow-hidden bg-gradient-to-b from-background/5 to-background/20">
       {slides.map((slide, index) => (
         <div
           key={index}
           className={cn(
-            "absolute inset-0 transition-opacity duration-1000",
-            index === current ? "opacity-100" : "opacity-0 pointer-events-none"
+            "absolute inset-0 transition-all duration-700 transform",
+            index === current
+              ? "opacity-100 translate-x-0"
+              : index < current
+              ? "opacity-0 -translate-x-full"
+              : "opacity-0 translate-x-full"
           )}
         >
           <Image
@@ -58,17 +62,21 @@ export function Hero() {
             alt={slide.title}
             fill
             priority
-            className="object-cover"
+            className="object-cover transition-transform duration-10000 hover:scale-105"
           />
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-up">
               {slide.title}
             </h1>
-            <p className="text-lg md:text-xl mb-8 max-w-2xl">
+            <p className="text-lg md:text-2xl mb-8 max-w-2xl animate-fade-up delay-200 opacity-90">
               {slide.subtitle}
             </p>
-            <Button asChild size="lg">
+            <Button
+              asChild
+              size="lg"
+              className="animate-fade-up delay-400 bg-primary/90 hover:bg-primary shadow-lg hover:shadow-xl transition-all duration-300"
+            >
               <a href={slide.ctaLink}>{slide.cta}</a>
             </Button>
           </div>

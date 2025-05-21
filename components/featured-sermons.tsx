@@ -65,35 +65,44 @@ export function FeaturedSermons({ initialSermons = [] }: FeaturedSermonsProps) {
   const displaySermons = sermons.length > 0 ? sermons : placeholderSermons;
 
   return (
-    <section className="py-16">
+    <section className="py-24 bg-gradient-to-b from-background to-muted/30">
       <div className="container">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
           <div>
-            <h2 className="text-3xl font-bold">Latest Sermons</h2>
-            <p className="text-muted-foreground mt-2">
+            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+              Latest Sermons
+            </h2>
+            <p className="text-muted-foreground mt-3 text-lg">
               Listen to our most recent messages
             </p>
           </div>
-          <Button asChild variant="outline" className="mt-4 md:mt-0">
+          <Button
+            asChild
+            variant="outline"
+            className="mt-4 md:mt-0 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+          >
             <Link href="/sermons">View All Sermons</Link>
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displaySermons.map((sermon) => (
-            <Card key={sermon.id} className="overflow-hidden">
-              <div className="relative h-48">
+            <Card
+              key={sermon.id}
+              className="overflow-hidden group hover:shadow-xl transition-all duration-300 border-muted/40 hover:border-primary/40"
+            >
+              <div className="relative h-56">
                 <Image
                   src={sermon.thumbnail_url || "/placeholder.svg"}
                   alt={sermon.title}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                   <Button
                     size="icon"
                     variant="secondary"
-                    className="rounded-full"
+                    className="rounded-full bg-primary/90 text-primary-foreground hover:scale-110 transition-transform duration-300"
                   >
                     <Play className="h-6 w-6" />
                   </Button>

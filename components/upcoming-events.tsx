@@ -87,39 +87,53 @@ export function UpcomingEvents({ initialEvents = [] }: UpcomingEventsProps) {
   }
 
   return (
-    <section className="py-16 bg-muted/30">
+    <section className="py-24 bg-gradient-to-t from-muted/50 to-background">
       <div className="container">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
           <div>
-            <h2 className="text-3xl font-bold">Upcoming Events</h2>
-            <p className="text-muted-foreground mt-2">
+            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary/90 to-primary/60">
+              Upcoming Events
+            </h2>
+            <p className="text-muted-foreground mt-3 text-lg">
               Join us for these special gatherings
             </p>
           </div>
-          <Button asChild variant="outline" className="mt-4 md:mt-0">
+          <Button
+            asChild
+            variant="outline"
+            className="mt-4 md:mt-0 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+          >
             <Link href="/events">View All Events</Link>
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayEvents.map((event) => (
-            <Card key={event.id} className="overflow-hidden">
-              <div className="relative h-48">
+            <Card
+              key={event.id}
+              className="overflow-hidden group hover:shadow-xl transition-all duration-300 border-muted/40 hover:border-primary/40"
+            >
+              <div className="relative h-56">
                 <Image
                   src={event.image_url || "/placeholder.svg"}
                   alt={event.title}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
               </div>
               <CardHeader>
-                <CardTitle className="line-clamp-1">{event.title}</CardTitle>
+                <CardTitle className="line-clamp-1 text-xl group-hover:text-primary transition-colors duration-300">
+                  {event.title}
+                </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="flex items-start gap-2">
-                  <Calendar className="h-4 w-4 mt-0.5 text-muted-foreground" />
+              <CardContent className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <Calendar className="h-5 w-5 mt-0.5 text-primary/80" />
                   <div>
-                    <p className="text-sm">{formatDate(event.start_date)}</p>
+                    <p className="text-sm font-medium">
+                      {formatDate(event.start_date)}
+                    </p>
                     {event.end_date && (
                       <p className="text-sm text-muted-foreground">
                         to {formatDate(event.end_date)}
@@ -127,18 +141,25 @@ export function UpcomingEvents({ initialEvents = [] }: UpcomingEventsProps) {
                     )}
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-muted-foreground" />
+                <div className="flex items-center gap-3">
+                  <Clock className="h-5 w-5 text-primary/70" />
                   <p className="text-sm">{formatTime(event.start_date)}</p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
+                <div className="flex items-center gap-3">
+                  <MapPin className="h-5 w-5 text-primary/70" />
                   <p className="text-sm">{event.location}</p>
                 </div>
-                <p className="line-clamp-2 text-sm pt-2">{event.description}</p>
+                <p className="line-clamp-2 text-sm text-muted-foreground">
+                  {event.description}
+                </p>
               </CardContent>
               <CardFooter>
-                <Button asChild variant="outline" size="sm" className="w-full">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="w-full hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                >
                   <Link href={`/events/${event.id}`}>Learn More</Link>
                 </Button>
               </CardFooter>
