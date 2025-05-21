@@ -55,48 +55,103 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="mb-4 text-lg font-bold">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="mb-6 text-xl font-heading font-bold relative inline-block">
+              Quick Links
+              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-accent"></span>
+            </h3>
+            <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/about" className="hover:underline">
+                <Link href="/about" className="hover:text-accent transition-colors flex items-center gap-1.5 group">
+                  <ArrowRight className="h-3.5 w-3.5 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/sermons" className="hover:underline">
+                <Link href="/sermons" className="hover:text-accent transition-colors flex items-center gap-1.5 group">
+                  <ArrowRight className="h-3.5 w-3.5 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                   Sermons
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="hover:underline">
+                <Link href="/events" className="hover:text-accent transition-colors flex items-center gap-1.5 group">
+                  <ArrowRight className="h-3.5 w-3.5 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                   Events
                 </Link>
               </li>
               <li>
-                <Link href="/give" className="hover:underline">
+                <Link href="/give" className="hover:text-accent transition-colors flex items-center gap-1.5 group">
+                  <ArrowRight className="h-3.5 w-3.5 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                   Give
                 </Link>
               </li>
             </ul>
           </div>
+          
           <div>
-            <h3 className="mb-4 text-lg font-bold">Service Times</h3>
-            <ul className="space-y-2 text-sm">
-              <li>Fellowship Service: Wednesday 10:00 PM - 3:00 AM</li>
+            <h3 className="mb-6 text-xl font-heading font-bold relative inline-block">
+              Service Times
+              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-accent"></span>
+            </h3>
+            <ul className="space-y-4">
+              <li className="flex gap-3">
+                <Clock className="h-5 w-5 text-accent flex-shrink-0" />
+                <div>
+                  <p className="font-medium">Fellowship Service</p>
+                  <p className="text-sm text-white/70">Wednesday 10:00 PM - 3:00 AM</p>
+                </div>
+              </li>
             </ul>
           </div>
+          
           <div>
-            <h3 className="mb-4 text-lg font-bold">Contact Us</h3>
-            <address className="not-italic text-sm space-y-2">
-              <p>1 Church Street</p>
-              <p>Bariga, Lagos</p>
-              <p>Phone: (=234) 456-7890</p>
-              <p>Email: info@shekinafamily.org</p>
+            <h3 className="mb-6 text-xl font-heading font-bold relative inline-block">
+              Contact Us
+              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-accent"></span>
+            </h3>
+            <address className="not-italic space-y-4">
+              <div className="flex gap-3">
+                <MapPin className="h-5 w-5 text-accent flex-shrink-0" />
+                <div>
+                  <p>1 Church Street</p>
+                  <p className="text-sm text-white/70">Bariga, Lagos</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <Phone className="h-5 w-5 text-accent flex-shrink-0" />
+                <p>(+234) 456-7890</p>
+              </div>
+              <div className="flex gap-3">
+                <Mail className="h-5 w-5 text-accent flex-shrink-0" />
+                <p>info@shekinafamily.org</p>
+              </div>
             </address>
           </div>
         </div>
-        <div className="mt-8 border-t border-primary-foreground/20 pt-8 text-center text-sm">
-          <p>
+        <div className="mt-16 border-t border-primary-foreground/20 pt-8 text-center">
+          <div className="grid md:grid-cols-2 gap-4 items-center mb-8">
+            <div className="md:order-1 md:text-right">
+              <Button asChild variant="outline" className="border-white/20 hover:bg-white/10 rounded-full px-6">
+                <Link href="/contact">Contact Us</Link>
+              </Button>
+            </div>
+            <div className="text-left">
+              <p className="text-white/80">
+                Subscribe to our newsletter for updates
+              </p>
+              <div className="mt-3 flex max-w-md">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="bg-white/10 border border-white/20 rounded-l-full py-2 px-4 w-full focus:outline-none focus:ring-1 focus:ring-accent"
+                />
+                <button className="bg-accent hover:bg-accent/80 text-accent-foreground px-4 rounded-r-full transition-colors">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <p className="text-white/60 text-sm">
             &copy; {new Date().getFullYear()} Shekina Family. All rights
             reserved.
           </p>
